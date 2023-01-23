@@ -27,4 +27,5 @@
             android:textSize="100sp"
             android:textColor="#9999ff"/>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
