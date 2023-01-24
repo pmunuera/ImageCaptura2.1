@@ -1,5 +1,6 @@
 package com.example.imagecaptura21;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -37,7 +38,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class CameraActivity extends AppCompatActivity {
-    private Executor executor = ContextCompat.getMainExecutor(this);
+    private Executor executor = Executors.newSingleThreadExecutor();
     private PreviewView previewView;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private TextView textView;
@@ -94,6 +95,8 @@ public class CameraActivity extends AppCompatActivity {
                         error.printStackTrace();
                     }
                 });
+                //Intent intent = new Intent(this, MainActivity.class);
+                //startActivity(intent);
             }
         });
     }

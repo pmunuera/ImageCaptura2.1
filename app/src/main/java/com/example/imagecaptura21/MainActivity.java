@@ -16,10 +16,10 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
-    private Executor executor = ContextCompat.getMainExecutor(this);
+    private Executor executor = Executors.newSingleThreadExecutor();
     private static final String[] CAMERA_PERMISSION = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final int CAMERA_REQUEST_CODE = 10;
-    public static ImageView captureImage;
+    //public static ImageView captureImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
