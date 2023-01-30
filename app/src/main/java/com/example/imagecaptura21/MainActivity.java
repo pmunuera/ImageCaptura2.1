@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -19,14 +20,15 @@ public class MainActivity extends AppCompatActivity {
     private Executor executor = Executors.newSingleThreadExecutor();
     private static final String[] CAMERA_PERMISSION = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
     private static final int CAMERA_REQUEST_CODE = 10;
-    //public static ImageView captureImage;
+    public static ImageView captureImage;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        captureImage = findViewById(R.id.imageView);
         Button enableCamera = findViewById(R.id.enableCamera);
         enableCamera.setOnClickListener(new View.OnClickListener() {
             @Override

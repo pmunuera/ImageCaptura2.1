@@ -20,12 +20,19 @@
             android:gravity="center">
         </TextView>
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:srcCompat="@tools:sample/avatars" />
+
         <Button
             android:id="@+id/enableCamera"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="Open Camera" />
+
     </LinearLayout>
 
 

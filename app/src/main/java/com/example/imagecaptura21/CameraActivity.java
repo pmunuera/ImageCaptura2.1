@@ -1,6 +1,7 @@
 package com.example.imagecaptura21;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -75,8 +76,8 @@ public class CameraActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyyMMddHHmmss", Locale.US);
-                File file = new File(getBatchDirectoryName(), mDateFormat.format(new Date())+ ".jpg");
-
+                File file = new File(getFilesDir(), mDateFormat.format(new Date())+ ".jpg");
+                Uri contentUri = Uri.fromFile(file);
                 ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(file).build();
                 imageCapture.takePicture(outputFileOptions, executor, new ImageCapture.OnImageSavedCallback () {
                     @Override
@@ -95,8 +96,9 @@ public class CameraActivity extends AppCompatActivity {
                         error.printStackTrace();
                     }
                 });
-                //Intent intent = new Intent(this, MainActivity.class);
-                //startActivity(intent);
+                MainActivity.captureImage.setImageURI(contentUri);
+                Intent intent = new Intent(CameraActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -112,12 +114,15 @@ public class CameraActivity extends AppCompatActivity {
                 image.close();
             }
         });
-        OrientationEventListener orientationEventListener = new OrientationEventListener(this) {
-            @Override
-            public void onOrientationChanged(int orientation) {
-                textView.setText(Integer.toString(orientation));
-            }
-        };
+        OrientationEventListener orientationEventListener = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.CUPCAKE) {
+            orientationEventListener = new OrientationEventListener(this) {
+                @Override
+                public void onOrientationChanged(int orientation) {
+                    textView.setText(Integer.toString(orientation));
+                }
+            };
+        }
         orientationEventListener.enable();
         preview = new Preview.Builder().build();
         cameraSelector = new CameraSelector.Builder()
