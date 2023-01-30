@@ -96,8 +96,9 @@ public class CameraActivity extends AppCompatActivity {
                         error.printStackTrace();
                     }
                 });
-                MainActivity.captureImage.setImageURI(contentUri);
+                //MainActivity.captureImage.setImageURI(contentUri);
                 Intent intent = new Intent(CameraActivity.this, MainActivity.class);
+                intent.putExtra("Imagen",contentUri);
                 startActivity(intent);
             }
         });
